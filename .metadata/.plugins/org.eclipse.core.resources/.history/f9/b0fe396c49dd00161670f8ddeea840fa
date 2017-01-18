@@ -1,0 +1,27 @@
+package com.docspot.eval;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.BlockJUnit4ClassRunner;
+
+@RunWith(value = BlockJUnit4ClassRunner.class)
+public class ParserTest {
+
+	private static final double DELTA = 1e-15;
+
+	// @Test
+	// public void testParse() {
+	// Parser tester = new Parser();
+	// assertEquals("must be 16.5", 16.5, tester.parse("((4 - 2 + 3 + 1) * 5 +
+	// 3) / 2"), DELTA);
+	// }
+
+	@Test(expected = RuntimeException.class)
+	public void testExceptionIsThrown() {
+		Parser tester = new Parser();
+		tester.parse("");
+	}
+
+}

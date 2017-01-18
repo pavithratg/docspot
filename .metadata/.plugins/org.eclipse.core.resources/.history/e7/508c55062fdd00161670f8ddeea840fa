@@ -1,0 +1,83 @@
+package com.docspot.eval;
+
+public class Parser {
+	static String x;
+	int pos = -1, ch;
+
+	void nextChar() {
+		ch = (++pos < str.length()) ? str.charAt(pos) : -1;
+	}
+
+	boolean eat(int charToEat) {
+		while (ch == ' ')
+			nextChar();
+		if (ch == charToEat) {
+			nextChar();
+			return true;
+		}
+		return false;
+	}
+
+	double parse(String str) {
+		nextChar();
+		double x = parseExpression(str);
+		if (pos < str.length())
+			throw new RuntimeException("Unexpected: " + (char) ch);
+		return x;
+	}
+
+	// Grammar:
+	// expression = term | expression `+` term | expression `-` term
+	// term = factor | term `*` factor | term `/` factor
+	// factor = `+` factor | `-` factor | `(` expression `)`
+	// | number | functionName factor | factor `^` factor
+
+	double parseExpression(String str) {
+		double x = parseTerm(str);
+		for (;;) {
+			if (eat('+'))
+				x += parseTerm(str); // addition
+			else if (eat('-'))
+				x -= parseTerm(str); // subtraction
+			else
+				return x;
+		}
+	}
+
+	double parseTerm(String str) {
+		double x = parseFactor(str);
+		for (;;) {
+			if (eat('*'))
+				x *= parseFactor(str); // multiplication
+			else if (eat('/'))
+				x /= parseFactor(str); // division
+			else
+				return x;
+		}
+	}
+
+	double parseFactor(String str) {
+		if (eat('+'))
+			return parseFactor(str); // unary plus
+		if (eat('-'))
+			return -parseFactor(str); // unary minus
+
+		double x;
+		int startPos = this.pos;
+		if (eat('(')) { // parentheses
+			x = parseExpression(str);
+			eat(')');
+		} else if ((ch >= '0' && ch <= '9') || ch == '.') { // numbers
+			while ((ch >= '0' && ch <= '9') || ch == '.')
+				nextChar();
+			x = Double.parseDouble(str.substring(startPos, this.pos));
+		}
+
+		else {
+			throw new RuntimeException("Unexpected: " + (char) ch);
+		}
+
+		return x;
+	}
+
+}

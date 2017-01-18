@@ -1,0 +1,13 @@
+package com.docspot.eval;
+
+/**
+ * Evaluate Mathematical Expressions
+ *
+ */
+public class Eval 
+{
+    public static void main( String[] args )
+    {
+        
+    }
+}

@@ -1,0 +1,11 @@
+package com.docspot.eval;
+
+import junit.framework.TestCase;
+
+public class MyClassTest extends TestCase {
+
+	public void testMultiply() {
+		fail("Not yet implemented");
+	}
+
+}

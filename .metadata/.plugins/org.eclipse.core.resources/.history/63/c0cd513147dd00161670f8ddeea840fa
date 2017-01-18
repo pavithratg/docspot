@@ -1,0 +1,11 @@
+package org.eviac.Junit;
+
+import junit.framework.TestCase;
+
+public class MyClassTest extends TestCase {
+
+	public void testMultiply() {
+		fail("Not yet implemented");
+	}
+
+}

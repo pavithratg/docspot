@@ -1,0 +1,31 @@
+package com.docspot.eval;
+
+/**
+ * Evaluate Mathematical Expressions
+ *
+ */
+public class Eval {
+	String x;
+	public static void main(String[] args) {
+		String s = "5.3";
+
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+
+		}
+	}
+
+	private Double parse(char c) {
+		x = "";
+		
+		if(c>='0' && c<='9' || c=='.'){
+			x += Character.toString(c);
+		}
+		if (c == '+') {
+		} else if (c == '-') {
+		} else if (c == '*') {
+		} else if (c == '/') {
+		}
+		return x;
+	}
+}
